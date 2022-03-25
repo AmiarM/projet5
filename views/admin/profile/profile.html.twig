@@ -1,0 +1,124 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		profil de
+		{{session.username}}
+	</title>
+{% endblock %}
+
+{% block contentAdmin %}
+	<!-- Page wrapper  -->
+	<!-- ============================================================== -->
+		<div class="page-wrapper"> <!-- ============================================================== -->
+		<!-- Container fluid  -->
+		<!-- ============================================================== -->
+			<div class="container-fluid"> <!-- ============================================================== -->
+			<!-- Bread crumb and right sidebar toggle -->
+			<!-- ============================================================== -->
+				<div class="row page-titles"> <div class="col-md-5 align-self-center">
+					<h4 class="text-themecolor">Profile</h4>
+				</div>
+				<div class="col-md-7 align-self-center text-right">
+					<div class="d-flex justify-content-end align-items-center">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item">
+								<p>Bienvenu su votre espace
+									{{session.username}}</p>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+			<!-- ============================================================== -->
+			<!-- End Bread crumb and right sidebar toggle -->
+			<!-- ============================================================== -->
+			<!-- ============================================================== -->
+			<!-- Start Page Content -->
+			<!-- ============================================================== -->
+			<!-- Row -->
+				<div
+				class="row"> <!-- Column -->
+				<div class="col-lg-4 col-xlg-3 col-md-5">
+					<div class="card">
+						<div class="card-body">
+							<center class="m-t-30">
+								<h2 class="my-5 h2">{{session.lastname|upper}}
+									{{session.firstname|upper }}</h2>
+								<img src="/uploads/{{session.image}}" class=" rounded-circle" width="150px"/>
+							</center>
+						</div>
+					</div>
+				</div>
+				<!-- Column -->
+				<!-- Column -->
+				<div class=" col-lg-8 col-xlg-9 col-md-7">
+					<div
+						class="card">
+						<!-- Tab panes -->
+						<div class="card-body">
+							<form class="form-horizontal form-material" method="post" action="/changeProfile" enctype="multipart/form-data">
+								<div class="form-group">
+									<label class="col-md-12">Prénom</label>
+									<div class="col-md-12">
+										<input type="text" name="firstname" placeholder="Votre Prénom" value="{{session.firstname}}" class="form-control form-control-line" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Nom</label>
+									<div class="col-md-12">
+										<input name="lastname" type="text" placeholder="Votre Nom" value="{{session.lastname}}" class="form-control form-control-line" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="username" class="col-md-12">Username</label>
+									<div class="col-md-12">
+										<input type="text" value="{{session.username}}" placeholder="Votre Username" class="form-control form-control-line" name="username" id="username" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="email" class="col-md-12">Email</label>
+									<div class="col-md-12">
+										<input type="email" value="{{session.email}}" placeholder="johnathan@admin.com" class="form-control form-control-line" name="email" id="email" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Password</label>
+									<div class="col-md-12">
+										<input name="password" type="password" placeholder="Votre mot de passe" class="form-control form-control-line">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-12">Inscrit Le:</label>
+									<div class="col-md-12">
+										<input disabled value="{{session.createdAt|date('d-m-Y')}}" type="text" placeholder="date d'inscription" class="form-control form-control-line" disabled>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="pictures">Photo</label>
+									<input type="hidden" name="MAX_FILE_SIZE" value="1000000"/>
+									<input type="file" name="pictures" accept="image/*"/>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="submit" class="btn btn-success" name="submit">Update Profile</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- Column -->
+			</div>
+			<!-- Row -->
+		<!-- ============================================================== -->
+			<!-- End PAge Content -->
+			<!-- ============================================================== -->
+		</div>
+		<!-- ============================================================== -->
+	<!-- End Container fluid  -->
+		<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+	<!-- ============================================================== -->
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "layout.html.twig" %}
+{% block title %}
+	<title>
+		Contactez-Nous
+	</title>
+{% endblock %}
+{% block content %}
+	<section class="paralax-mf footer-paralax bg-image sect-mt1 route" style="background-image: url(img/overlay-bg.jpg)">
+		<div class="overlay-mf"></div>
+		<div class="container">
+			{% if success %}
+				<div class="alert alert-success" style="text-align:center; font-weight:bold; margin-top:150px;">
+					{{success}}
+				</div>
+			{% endif %}
+			{% if errors %}
+				<div class="alert alert-danger" style="text-align:center; font-weight:bold; margin-top:150px;">
+					{% for error in errors %}
+						{{error.0}}<br>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="contact-mf">
+						<div id="contact" class="box-shadow-full">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="title-box-2">
+										<h5 class="title-left">
+											CONTACTEZ-NOUS
+										</h5>
+									</div>
+									<div>
+										<form action="/contact" method="POST">
+											<div class="row">
+												<div class="col-md-12 mb-3">
+													<div class="form-group">
+														<input type="text" name="firstname" class="form-control" id="firstname" placeholder="Votre Prénom" data-rule=" minlen:4" data-msg=" please enter at least 4 chars"/>
+													</div>
+												</div>
+												<div class=" col-md-12 mb-3">
+													<div class="form-group">
+														<input type="text" name="lastname" class="form-control" id="lastname" placeholder="Votre Nom" data-rule=" minlen:4" data-msg=" please enter at least 4 chars"/>
+													</div>
+												</div>
+												<div class=" col-md-12 mb-3">
+													<div class="form-group">
+														<input type="email" class="form-control" name="email" id="email" placeholder="Votre Email" data-rule="email" data-msg="Please enter a valid email"/>
+													</div>
+												</div>
+												<div class="col-md-12 mb-3">
+													<div class="form-group">
+														<input type="text" class="form-control" name="subject" id="subject" placeholder="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject"/>
+													</div>
+												</div>
+												<div class="col-md-12 mb-3">
+													<div class="form-group">
+														<textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<input type="submit" name="submit" class="button button-a button-big button-rouded" value="send message">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="title-box-2 pt-4 pt-md-0">
+										<h5 class="title-left">
+											MES COORDONNÉES
+										</h5>
+									</div>
+									<div class="more-info">
+										<ul class="list-ico">
+											<li>
+												<span class="ion-ios-location"></span>
+												26  AV JEAN JAURES, CROSNE 91560</li>
+											<li>
+												<span class="ion-ios-telephone"></span>
+												07 01 02 03 04</li>
+											<li>
+												<span class="ion-email"></span>
+												mohamed.amiar@gmail.com</li>
+										</ul>
+									</div>
+									<div class="socials">
+										<ul>
+											<li><a href=""><span class="ico-circle"><i class="ion-social-facebook"></i></span></a></li>
+											<li><a href=""><span class="ico-circle"><i class="ion-social-instagram"></i></span></a></li>
+											<li><a href=""><span class="ico-circle"><i class="ion-social-twitter"></i></span></a></li>
+											<li><a href=""><span class="ico-circle"><i class="ion-social-pinterest"></i></span></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<br><br><br>
+{% endblock %}

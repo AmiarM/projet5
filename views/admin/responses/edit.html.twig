@@ -1,0 +1,75 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		Editer une Response
+	</title>
+{% endblock %}
+{% block contentAdmin %}
+	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="#" _msthash="1535820" _msttexthash="111306">Acceuil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="" _msthash=" 1535950" _msttexthash=" 231530">{{post.tag.name}}</a>
+			</li>
+			<li class="breadcrumb-item active" _msthash="1536080" _msttexthash="113412">{{post.title}}</li>
+		</ol>
+		<!--Main layout-->
+		<section class="mt-5">
+			<div class="row">
+				<div class="col-md-6">
+					<p class="mb-2 text-muted text-uppercase small">Commentaire</p>
+					<span>{{response.content}}</span>
+					<p>
+						Post Published On:
+						<br>
+						<span class="mr-1">
+							<strong>{{response.createdAt|date('d-m-Y')}}</strong>
+						</span>
+					</p>
+					<div class="table-responsive mb-2">
+						<table class="table table-sm table-borderless">
+							<tbody>
+								<tr>
+									<td>
+										<p>Commenté par:</p>
+										<img width="50px" height="50px" src="/uploads/{{response.user.image}}" alt="" class="avatar rounded-circle">
+										<span class="badge badge-info">
+											{{response.user.username}}
+										</span>
+										<hr>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p>Status de la réponse:</p>
+										<form action="/admin/responses/update/{{response.id}}" method="post">
+											<div class="custom-control custom-switch">
+												<input type="checkbox" class="custom-control-input" id="disabled" name="disabled" {% if response.disabled == 0 %} checked {% endif %}>
+												<label class="custom-control-label" for="disabled"></label>
+											</div>
+											<button type="submit" name="submit" class="btn btn-success">
+												<i class="fa fa-check"></i>
+												Valider la response
+											</button>
+										</form>
+										<hr>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<a href="" class="btn btn-primary btn-md mr-1 mb-2">
+						<i class="fa fa-arrow-left"></i>
+						Retour
+					</a>
+					<a href="/admin/responses/delete/{{response.id}}" class="btn btn-danger btn-md mr-1 mb-2">
+						<i class="fa fa-trash"></i>
+						Supprimer la response
+					</a>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

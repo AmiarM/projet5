@@ -1,0 +1,90 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>Administration des posts</title>
+{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="/css/datatable.css">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+{% endblock %}
+{% block contentAdmin %}
+	<div class="container" style="padding-top: 150px;font-size:16px;">
+		<div class="row">
+			<div class="col-6">
+				<div class="panel-heading">
+					<h1 class="text-left">Posts Lists:</h1>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="panel-heading">
+					<a href="/admin/posts/create" class="btn btn-primary pull-right" style="font-size:16px;">
+						<i class="fa fa-plus-circle"></i>
+						Ajouter</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row" style="margin: 50px">
+
+			<table id="myTable" style="border:solid 1px black" width="100%">
+				<thead>
+					<tr>
+						<th>TITLE</th>
+						<th>CONTENT</th>
+						<th>CREATED AT</th>
+						<th>PUBLISHED</th>
+						<th>ACTIONS</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for post in posts %}
+						<tr>
+							<td>{{post.title}}</td>
+							<td>{{post.excerpt}}</td>
+							<td style="text-align:center;">{{post.createdAt|date('d-m-Y')}}</td>
+							<td>
+								<div class="custom-control custom-switch" style="text-align:center;">
+									<input type="checkbox" class="custom-control-input" id="disabled" name="disabled" {% if post.published == 1 %} checked {% endif %}>
+									<label class="custom-control-label" for="disabled"></label>
+								</div>
+							</td>
+							<td>
+								<div class="btn-group">
+									<small>
+										<a href="/admin/posts/update/{{post.id}}" class="btn btn-primary" title="Edit" data-toggle="tooltip">
+											<i class="fa fa-edit"></i>
+										</a>
+									</small>
+
+									<small>
+										<a href="/admin/posts/delete/{{post.id}}" class="btn btn-danger" title="Delete" data-toggle="tooltip">
+											<i class="fa fa-trash"></i>
+										</a>
+									</small>
+
+									<small>
+										<a href="/admin/posts/show/{{post.id}}" class="btn btn-success" title="Show" data-toggle="tooltip">
+											<i class="fa fa-eye"></i>
+										</a>
+									</small>
+
+									<small>
+										<a href="/admin/posts/details/{{post.id}}" class="btn btn-secondary" title="Details" data-toggle="tooltip">
+											<i class="fa fa-list"></i>
+										</a>
+									</small>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{% block javascript %}
+		<script src="/js/datatable.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	{% endblock %}
+{% endblock %}

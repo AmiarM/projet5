@@ -1,0 +1,188 @@
+{% extends "layout.html.twig" %}
+{% block title %}
+	<title>
+		Détail du Post:
+		{{post.title}}
+	</title>
+{% endblock %}
+
+{% block content %}*
+	<!--/ Section Blog-Single Star /-->
+	<section class="blog-wrapper sect-pt4" id="blog">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="post-box">
+						<div class="post-thumb">
+							<img src="/uploads/{{post.image}}" class="img-fluid" style="width:100%;" alt="">
+						</div>
+						<div class="post-meta">
+							<h1 class="article-title" style="font-weight:bold;text-transform: uppercase;">{{post.title}}</h1>
+							<ul>
+								<li>
+									<span class="ion-ios-person"></span>
+									<a href="#">{{post.user.username}}</a>
+								</li>
+								<li>
+									<span class="ion-pricetag"></span>
+									{% for tag in post.tags %}
+										<h6 class="badge badge-success">
+											<a href="/tags/{{tag.id}}" class="text-white">{{tag.name}}</a>
+										</h6>
+									{% endfor %}
+								</li>
+								<li>
+									<span class="ion-chatbox"></span>
+									<a href="#">{{post.comments|length}}</a>
+								</li>
+							</ul>
+						</div>
+						<div class="article-content">
+							<blockquote class="blockquote">
+								<p class="mb-0">{{post.content}}</p>
+							</blockquote>
+						</div>
+					</div>
+					<div class="box-comments">
+						<div class="title-box-2">
+							<h4 class="title-comments title-left">Comments ({{post.comments|length}})</h4>
+						</div>
+						<ul class="list-comments">
+							{% for comment in post.comments %}
+								{% if comment.disabled == 0 %}
+									<li>
+										<div class="comment-avatar">
+											<img src="/uploads/{{comment.user.image}}" alt="image">
+										</div>
+										<div class="comment-details">
+											<h4 class="comment-author">{{comment.user.username}}</h4>
+											<span>{{comment.createdAt|date('d-m-Y')}}</span>
+											<p>
+												{{comment.content}}
+											</p>
+											<p>
+												<small>
+													<a href="/comments/response/{{comment.id}}" class="js-scroll btn btn-primary" style="color:#fff;">
+														<i class="fa fa-reply"></i>
+													</a>
+												</small>
+												<small>
+													<a href="/comments/reply/{{comment.id}}" class="js-scroll btn btn-primary" style="color:#fff;">
+														<i class="fa fa-edit"></i>
+													</a>
+												</small>
+											</p>
+										</div>
+										{% if response.disabled == 0 %}
+											{% for response in responses %}
+												<div class="d-flex flex-start mt-4" style="margin-left:90px;">
+													<a class="me-3" href="#">
+														<img class="rounded-circle shadow-1-strong" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(11).webp" alt="avatar" width="65" height="65"/>
+													</a>
+													<div class="flex-grow-1 flex-shrink-1">
+														<div>
+															<div class="d-flex justify-content-between align-items-center">
+																<p class="mb-1">
+																	Simona Disa
+																	<span class="small">- 3 hours ago</span>
+																</p>
+															</div>
+															<p class="small mb-0">
+																{{response.content}}
+															</p>
+														</div>
+													</div>
+												</div>
+											{% endfor %}
+										{% endif %}
+									</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+					{% if session.email is defined%}
+						<div class="form-comments">
+							<div class="title-box-2">
+								<h3 class="title-left">
+									Leave a Reply
+								</h3>
+							</div>
+							<form action="/admin/comments/create" method="post">
+								<div class="row">
+									<div class="col-md-6 mb-3">
+										<div class="form-group">
+											<label for="email">Email *</label>
+											<input type="email" name="email" class="form-control input-mf" value="{{session.email}}" id="email" placeholder="Email *" required disabled="disabled">
+										</div>
+									</div>
+									<div class="col-md-12 mb-3">
+										<div class="form-group">
+											<label for="email">Comment *</label>
+											<textarea id="comment" class="form-control input-mf" placeholder="Comment *" name="comment" cols="45" rows="8" required></textarea>
+										</div>
+									</div>
+									<div class="col-md-6 mb-3">
+										<div class="form-group">
+											<input type="hidden" name="id" class="form-control input-mf" value="{{post.id}}" placeholder="Id du Post *" required>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<button type="submit" name="submit" class="button button-a button-big button-rouded">Send comment</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					{% endif %}
+
+				</div>
+				<div class="col-md-4">
+					<div class="widget-sidebar">
+						<h5 class="sidebar-title">Recent Post</h5>
+						<div class="sidebar-content">
+							<ul class="list-sidebar">
+								{% for post in recentsPosts %}
+									<li>
+										<a href="/posts/{{post.id}}">{{post.title|upper}}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<div class="widget-sidebar">
+						<h5 class="sidebar-title">Archives</h5>
+						<div class="sidebar-content">
+							<ul class="list-sidebar">
+								{% for post in archives %}
+									<li>
+										<a href="/posts/{{post.id}}">{{post.title|upper}}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<div class="widget-sidebar widget-tags">
+						<h5 class="sidebar-title">Tags</h5>
+						<div class="sidebar-content">
+							<ul>
+								{% for tag in tags %}
+									<li>
+										<a href="/tags/{{tag.id}}">{{tag.name}}</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ Section Blog-Single End /-->
+	{% block javascript %}
+		<script>
+			$(document).on("click", ".passingID", function () {
+var ids = $(this).data('id');
+$(".modal-body #idkl").val(ids);
+});
+		</script>
+	{% endblock %}
+{% endblock %}

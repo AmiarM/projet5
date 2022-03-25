@@ -1,0 +1,91 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		comments per post:
+		{{post.title}}
+	</title>
+{% endblock %}
+{% block contentAdmin %}
+	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="#" _msthash="1535820" _msttexthash="111306">Acceuil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="" _msthash=" 1535950" _msttexthash=" 231530">{{post.tag.name}}</a>
+			</li>
+			<li class="breadcrumb-item active" _msthash="1536080" _msttexthash="113412">{{post.title}}</li>
+		</ol>
+		<section class="mt-5">
+			<div class="row">
+				<div class="col-md-6 mb-4 mb-md-0">
+					<div id="mdb-lightbox-ui"></div>
+					<div class="mdb-lightbox">
+						<div class="row product-gallery mx-1">
+							<div class="col-12 mb-0">
+								<figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px;">
+									<a href="/posts/show/{{post.id}}">
+										<img src="/uploads/{{post.image}}" width="100%" alt="image du post" class=" img-fluid img-thumbnail rounded">
+									</a>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<p>Tag of post:</p>
+					{% for tag  in post.tags %}
+						<span class="badge badge-info">
+							<a href="/admin/tags/{{tag.id}}" style="color:white;">{{tag.name}}</a>
+						</span>
+					{% endfor %}
+					<p>Title of Post:</p>
+					<p class="mb-2 text-muted text-uppercase small">{{post.title}}</p>
+					<p>Chapo of post:</p>
+					<span class="badge badge-info">{{post.chapo}}</span>
+					<p></p>
+					<p>Date of post:</p>
+					<span class="mr-1">
+						<strong>{{post.createdAt|date('d-m-Y')}}</strong>
+					</span>
+				</p>
+				<hr>
+				<div class="table-responsive mb-2">
+					<table class="table table-sm table-borderless">
+						<tbody>
+							<tr>
+								<img src="/uploads/{{post.user.image}}" alt="" class="avatar rounded-circle" width="50px;" height="50px;">
+								<span class="author">
+									Posté par:
+									{{post.user.username}}
+								</span>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<hr>
+				{% for comment in post.comments %}
+					<p>content of comment:</p>
+					<p>{{comment.content}}</p>
+					<div>
+						<p>status of comment:</p>
+						<input value="published" type="checkbox" class="custom-control-input" id="published" name="status" {% if comment.disabled == 0 %} checked {% endif %}>
+						<label class="custom-control-label" for="published"></label>
+					</div>
+					<div>
+						<img src="/uploads/{{comment.user.image}}" alt="" class="avatar rounded-circle" width="50px;" height="50px;">
+						<span class="author">
+							Commenté par:
+							{{comment.user.username}}
+						</span>
+					</div>
+					<a href="/admin/posts" class="btn btn-primary btn-md mr-1 mb-2">
+						<i class="fa fa-arrow-left "></i>
+						Retour à l'acceuil
+					</a>
+					<hr>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+</div>{% endblock %}
