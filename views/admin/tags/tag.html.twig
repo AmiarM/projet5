@@ -1,0 +1,16 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		Posts par Tag
+	</title>
+{% endblock %}
+{% block contentAdmin %}
+	<div class="container" style="padding-top:100px">
+		<h1 class="badge badge-success" style="font-size:16px;">Nombre de posts:({{posts|length}})</h1>
+		{% for post in posts %}
+			<div class="list-group" style="font-weight:bold;text-transform: uppercase; text-align:center">
+				<a href="/admin/posts/show/{{post.id}}" class="list-group-item list-group-item-action">{{post.title}}</a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

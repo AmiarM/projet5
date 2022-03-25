@@ -1,0 +1,83 @@
+{% extends "layout.html.twig" %}
+{% block title %}
+	<title>
+		Liste des Posts
+	</title>
+{% endblock %}
+{% block content %}
+	<!--/ Section Blog Star /-->
+	<section id="blog" class="blog-mf sect-pt4 route" style="margin-top:150px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="title-box text-center">
+						<h3 class="title-a">
+							Blog
+						</h3>
+						<div class="line-mf"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{% if posts|length > 0 %}
+					{% for post in posts %}
+						<div class="col-md-4">
+							<div class="card card-blog">
+								<div class="card-img">
+									<a href="/posts/{{post.id}}">
+										<img src="/uploads/{{post.image}}" alt="" class="img-fluid" width="100%" height="231.667px">
+									</a>
+								</div>
+								<div class="card-body">
+									<div class="card-category-box">
+										{% for tag in post.tags %}
+											<h6 class="badge badge-success">
+												<a href="/tags/{{tag.id}}" class="text-white">{{tag.name}}</a>
+											</h6>
+										{% endfor %}
+									</div>
+									<h3 class="card-title">
+										<a href="/posts/{{post.id}}">
+											<h4 class="card-title">{{post.title|upper}}</h4>
+										</a>
+									</h3>
+									<h6 class="badge badge-success">
+										{{post.chapo}}
+									</h6>
+									<p class="card-description"></p>
+									<p class="card-text">{{post.excerpt}}</p>
+								</div>
+								<div class="card-footer">
+									<div class="post-author">
+										<a href="#">
+											<img src="/uploads/{{post.user.image}}" alt="" class="avatar rounded-circle">
+											<span class="author">
+												{{post.user.firstname}}
+												{{post.user.lastname}}
+											</span>
+										</a>
+									</div>
+									<div class="post-date">
+										<span class="ion-ios-clock-outline"></span>
+										{{post.createdAt|date('d-m-Y')}}
+									</div>
+								</div>
+							</div>
+
+						</div>
+					{% endfor %}
+				{% else %}
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="alert alert-danger" style="font-weight:bold; text-align:center;">
+									Aucun post publié
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}

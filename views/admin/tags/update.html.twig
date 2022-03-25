@@ -1,0 +1,29 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		Modifier le Tag:
+		{{tag.name}}
+	</title>
+{% endblock %}
+{% block contentAdmin %}
+	<h1>Modifier un tag tag</h1>
+
+	<div class="container" style="margin-top:50px;">
+		{% if messages |length >0 %}
+			{% for message in messages %}
+				<div class="alert alert-danger" style="text-align:center;font-weight:bold;">
+					{{message.0}}
+				</div>
+			{% endfor %}
+		{% endif %}
+		<form action="/admin/tags/update/{{tag.id}}" method="post" style=" margin-top:50px;">
+			<div class="form-group">
+				<label for="name">Nom du Tag</label>
+				<input type="text" class="form-control" name="name" id="title" value="{{tag.name}}">
+			</div>
+			<button type="submit" name="submit" class="btn btn-primary">Enregistrer les modifications</button>
+		</form>
+
+	</div>
+
+{% endblock %}

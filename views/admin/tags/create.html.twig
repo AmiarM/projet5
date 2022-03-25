@@ -1,0 +1,27 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		Créer un nouveau Tag
+	</title>
+{% endblock %}
+{% block contentAdmin %}
+	<h1>Créer un nouveau tag</h1>
+
+	<div class="container" style="padding-top:50px;">
+		{% if messages |length >0 %}
+			{% for message in messages %}
+				<div class="alert alert-danger" style="text-align:center;font-weight:bold;">
+					{{message.0}}
+				</div>
+			{% endfor %}
+		{% endif %}
+		<form action="/admin/tags/create" method="POST" style=" margin-top:50px;">
+			<div class="form-group">
+				<label for="name">Nom du Tag</label>
+				<input type="text" class="form-control" name="name" id="title" placeholder="Entrer le nom du tag">
+			</div>
+			<input type="submit" name="submit" class="btn btn-primary" value="Ajouter un Tag">
+		</form>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		Modifier Post:
+		{{post.title}}
+	</title>
+{% endblock %}
+
+{% block contentAdmin %}
+	<h1>Editer un  post</h1>
+
+	<div class="container" style="margin-top:50px;">
+		{% if messages |length >0 %}
+			{% for message in messages %}
+				<div class="alert alert-danger" style="text-align:center;font-weight:bold;">
+					{{message.0}}
+				</div>
+			{% endfor %}
+		{% endif %}
+		<form action="/admin/posts/update/{{post.id}}" method="POST" style="margin-top:50px;" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="title">Titre de l'article</label>
+				<input type="text" class="form-control" name="title" id="title" value="{{post.title}}">
+			</div>
+			<div class="form-group">
+				<label for="chapo">Chapo de l'article</label>
+				<input type="text" class="form-control" name="chapo" id="chapo" value="{{post.chapo}}">
+			</div>
+			<div class="form-group">
+				<label for="content">Contenu de l'article</label>
+				<textarea name="content" id="content" rows="8" class="form-control">{{post.content}}</textarea>
+			</div>
+			<div class="form-group">
+				<label for="pictures">Image de l'atrticle</label>
+				<input type="file" name="pictures" id="pictures"/>
+			</div>
+
+			<div class="form-group">
+				<label for="tags">Tag de l'article</label>
+				<select multiple class="form-control" id="tags" name="tags[]">
+					{% for tag in tags %}
+						<option value="{{tag.id}}">
+							{{tag.name}}
+						</option>
+					{% endfor %}
+				</select>
+			</div>
+			<button type="submit" name="submit" class="btn btn-primary">Enregistrer les modifications</button>
+		</form>
+
+	</div>
+
+{% endblock %}

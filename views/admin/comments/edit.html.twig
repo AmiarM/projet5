@@ -1,0 +1,106 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		Editer un Comment
+	</title>
+{% endblock %}
+{% block contentAdmin %}
+	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item">
+				<a href="#" _msthash="1535820" _msttexthash="111306">Acceuil</a>
+			</li>
+			<li class="breadcrumb-item">
+				<a href="" _msthash=" 1535950" _msttexthash=" 231530">{{post.tag.name}}</a>
+			</li>
+			<li class="breadcrumb-item active" _msthash="1536080" _msttexthash="113412">{{post.title}}</li>
+		</ol>
+		<!--Main layout-->
+		<section class="mt-5">
+			<div class="row">
+				<div class="col-md-6 mb-4 mb-md-0">
+					<div id="mdb-lightbox-ui"></div>
+					<div class="mdb-lightbox">
+						<div class="row product-gallery mx-1">
+							<div class="col-12 mb-0">
+								<figure class="view overlay rounded z-depth-1 main-img" style="max-height: 450px;">
+									<a href="#">
+										<img src="/uploads/{{comment.post.image}}" width="100%" alt=" " class=" img-fluid img-thumbnail rounded">
+									</a>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					{% for tag  in comment.post.tags %}
+						<span class="badge badge-info">
+							<a href="/admin/tags/{{tag.id}}" style="color:white;">{{tag.name}}</a>
+						</span>
+					{% endfor %}
+					<p class="mb-2 text-muted text-uppercase small">{{comment.post.title}}</p>
+					<span class="badge badge-info">{{comment.post.chapo}}</span>
+					<p>
+						Post Published On:
+						<br>
+						<span class="mr-1">
+							<strong>{{comment.post.createdAt|date('d-m-Y')}}</strong>
+						</span>
+					</p>
+					<p class="pt-1">{{comment.post.content}}</p>
+					<div class="table-responsive mb-2">
+						<table class="table table-sm table-borderless">
+							<tbody>
+								<tr>
+									<td>
+										<p>Commenté par:</p>
+										<a href="#">
+											<img width="50px" height="50px" src="/uploads/{{comment.user.image}}" alt="" class="avatar rounded-circle">
+											<span class="author">
+												{{comment.user.username}}
+											</span>
+										</a>
+										<hr>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p>Contenu:</p>
+										<span>
+											{{comment.content}}
+										</span>
+									</td>
+									<hr>
+								</tr>
+								<tr>
+									<td>
+										<p>Status du Commentaire:</p>
+										<form action="/admin/comments/update/{{comment.id}}" method="post">
+											<div class="custom-control custom-switch">
+												<input type="checkbox" class="custom-control-input" id="disabled" name="disabled" {% if comment.disabled==0 %} checked {% endif %}>
+												<label class="custom-control-label" for="disabled"></label>
+											</div>
+											<button type="submit" name="submit" class="btn btn-success">
+												<i class="fa fa-check"></i>
+												Valider le Commentaire
+											</button>
+										</form>
+										<hr>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<a href="" class="btn btn-primary btn-md mr-1 mb-2">
+						<i class="fa fa-arrow-left"></i>
+						Retour
+					</a>
+					<a href="/admin/comments/delete/{{comment.id}}" class="btn btn-danger btn-md mr-1 mb-2">
+						<i class="fa fa-trash"></i>
+						Supprimer le Commentaire
+					</a>
+				</div>
+			</div>
+		</section>
+	</div>
+{% endblock %}

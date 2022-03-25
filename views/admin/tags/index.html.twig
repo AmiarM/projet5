@@ -1,0 +1,114 @@
+{% extends "layoutAdmin.html.twig" %}
+{% block title %}
+	<title>
+		Administration des Tags
+	</title>
+{% endblock %}
+{% block contentAdmin %}
+	<div class="container">
+		<div class="row">
+			<!-- ============================================================== -->
+			<!-- Main wrapper - style you can find in pages.scss -->
+			<!-- ============================================================== -->
+				<div id="main-wrapper"> <!-- ============================================================== -->
+				<!-- Page wrapper  -->
+				<!-- ============================================================== -->
+					<div class="page-wrapper"> <!-- ============================================================== -->
+					<!-- Container fluid  -->
+					<!-- ============================================================== -->
+						<div class="container-fluid"> <!-- ============================================================== -->
+						<!-- Bread crumb and right sidebar toggle -->
+						<!-- ============================================================== -->
+							<div class="row page-titles"> <div class="col-md-5 align-self-center">
+								<h4 class="text-themecolor">TABEAU DE BORD</h4>
+							</div>
+							<div class="col-md-7 align-self-center text-right">
+								<div class="d-flex justify-content-end align-items-center">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item">
+											<a href="/admin/posts">ACCEUIL</a>
+										</li>
+										<li class="breadcrumb-item active">TABLEAU DE BORD</li>
+									</ol>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="row">
+								<div class="col-md-12">
+									<h2>Liste des Tags</h2>
+								</div>
+							</div>
+							<!-- /. ROW  -->
+							<hr/>
+
+							<div class="row">
+								<div
+									class="col-md-12">
+									<!-- Advanced Tables -->
+									<div class="panel panel-default">
+										<div class="row">
+											<div class="col-6">
+												<div class="panel-heading">
+													Gestion des Tags
+												</div>
+											</div>
+											<div class="col-6">
+												<div class="panel-heading">
+													<a href="/admin/tags/create" class="btn btn-primary">
+														<i class="fa fa-plus-circle"></i>
+														Ajouter</a>
+												</div>
+											</div>
+										</div>
+										<div class="panel-body">
+											<div class="table-responsive">
+												<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+													<thead>
+														<tr></tr>
+														<tr>
+															<th scope="col">#</th>
+															<th scope="col">Nom</th>
+															<th scope="col">Publié le</th>
+															<th scope="col">Actions</th>
+														</tr>
+													</thead>
+												</tr>
+											</thead>
+											<tbody>
+												{% for tag in tags %}
+													<tr class="odd gradeX">
+														<th scope="row">{{tag.id}}</th>
+														<td>{{tag.name}}</td>
+														<td>{{tag.createdAt|date('d-m-Y H:i:s')}}</td>
+														<td>
+															<a href="/admin/tags/update/{{tag.id}} " class=" btn btn-warning">
+																<i class="fa fa-edit"></i>
+															</a>
+															<a href="/admin/tags/destroy/{{tag.id}}" class="d-inline btn btn-danger">
+																<i class="fa fa-ban"></i>
+															</a>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+
+								</div>
+							</div>
+							<!--End Advanced Tables -->
+						</div>
+					</div>
+					<!-- /. PAGE WRAPPER  -->
+				</div>
+			</div>
+		</div>
+		<!-- ============================================================== -->
+	<!-- End Container fluid  -->
+		<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+	<!-- ============================================================== -->
+</div></div>{% endblock %}
