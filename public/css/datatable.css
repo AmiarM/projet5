@@ -1,0 +1,11 @@
+.dataTable table tr {
+  border: solid 1px black;
+}
+
+body {
+  font-family: "Times New Roman", Times, serif;
+}
+
+small a {
+  margin-right: 2px;
+}
