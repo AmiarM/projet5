@@ -13,7 +13,7 @@ composer install
 # création de la base de donnée
 ```phpmyadmin```
 # call the Doctrine command-line tool
-```call the Doctrine command-line tool```
+```vendor/bin/doctrine orm:schema-tool:create```
 # lancer le serveur interne de php
 ```php -S localhost:8000 -t public````
 # acceder à l'apllication
