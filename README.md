@@ -15,6 +15,6 @@ composer install
 # call the Doctrine command-line tool
 ```vendor/bin/doctrine orm:schema-tool:create```
 # lancer le serveur interne de php
-```php -S localhost:8000 -t public````
+```php -S localhost:8000 -t public```
 # acceder à l'apllication
 ```localhost:8000```
