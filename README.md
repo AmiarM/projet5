@@ -6,4 +6,7 @@
 # cloner le projet
 ```git clone https://github.com/AmiarM/projet5.git```
 # installer les dépendances du projet
-```composer install```
+```
+CD projet-6
+composer install
+```
